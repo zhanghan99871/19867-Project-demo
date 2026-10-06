@@ -38,6 +38,13 @@
         <option value="daily">Single day</option>
       </select>
     </div>
+    <div class="control-block">
+      <label for="flowView">Flow view</label>
+      <select id="flowView">
+        <option value="retained">Retained flow</option>
+        <option value="reduced">Reduced flow</option>
+      </select>
+    </div>
     <div class="control-block date-control disabled" id="dateControl">
       <label for="dateSlider">Date: <span id="dateLabel"></span></label>
       <input id="dateSlider" type="range" min="0" value="0" step="1" />
@@ -62,11 +69,11 @@
         <div class="legend-inline"><span class="map-chip"></span> state area <span class="line"></span> flow</div>
       </div>
       <div id="network" aria-label="Physical map of selected states and optimized travel flows"></div>
-      <div class="network-note">State shapes use their real geographic positions. Arrow width is proportional to retained travel flow; only the strongest directed edges are shown for readability.</div>
+      <div class="network-note" id="networkNote">State shapes use their real geographic positions. Arrow width is proportional to retained travel flow; only the strongest directed edges are shown for readability.</div>
     </article>
 
     <article class="panel chart-panel">
-      <div class="panel-head"><div><div class="kicker">Selected optimizer</div><h2>Daily retained travel</h2></div></div>
+      <div class="panel-head"><div><div class="kicker">Selected optimizer</div><h2 id="selectedFlowTitle">Daily retained travel</h2></div></div>
       <div class="chart-wrap"><canvas id="selectedFlowChart"></canvas></div>
       <div class="selected-summary" id="selectedSummary"></div>
     </article>
@@ -74,7 +81,7 @@
 
   <section class="panel comparison-panel">
     <div class="panel-head">
-      <div><div class="kicker">Cross-method comparison</div><h2>Daily travel flow after optimization</h2></div>
+      <div><div class="kicker">Cross-method comparison</div><h2 id="flowComparisonTitle">Daily retained travel flow after optimization</h2></div>
       <span class="pill">Jul 30 – Aug 28, 2020</span>
     </div>
     <div class="chart-wrap large"><canvas id="flowComparisonChart"></canvas></div>

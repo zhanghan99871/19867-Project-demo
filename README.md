@@ -75,3 +75,12 @@ The summary metrics shown in the dashboard are the same values reported in the s
 ## Optimizer comparison figure
 
 The page includes the original saved epidemic comparison plot at `assets/optimizer_compare_infected.png`. It is shown in a full-width **Epidemic Outcome Comparison** section and can be clicked to open at full resolution.
+
+## Flow view toggle
+
+The demo now includes a **Flow view** selector:
+
+- **Retained flow**: mobility that remains after the selected optimizer is applied.
+- **Reduced flow**: mobility removed by the selected optimizer, computed as `original flow - retained flow`.
+
+The physical-map arrows, selected-optimizer daily chart, and cross-optimizer comparison chart all switch together. Original daily flow is reconstructed from the continuous-edge optimizer's saved keep ratios and optimized flow matrices, matching the reported 30-day total travel of 192,956,585.
