@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Interactive demo for epidemic-aware travel optimization across ten U.S. states." />
+  <title>Travel Optimization Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">19-867 · From Data To Action</div>
+      <h1>Epidemic-Aware Travel Optimization</h1>
+      <p class="subtitle">Explore how different optimization policies reshape interstate mobility and epidemic outcomes.</p>
+    </div>
+    <div class="hero-badge"><span>10</span><small>states</small></div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="controls panel">
+    <div class="control-block wide">
+      <label for="optimizerSelect">Optimizer</label>
+      <select id="optimizerSelect"></select>
+    </div>
+    <div class="control-block">
+      <label for="networkMode">Network view</label>
+      <select id="networkMode">
+        <option value="aggregate">30-day aggregate</option>
+        <option value="daily">Single day</option>
+      </select>
+    </div>
+    <div class="control-block date-control disabled" id="dateControl">
+      <label for="dateSlider">Date: <span id="dateLabel"></span></label>
+      <input id="dateSlider" type="range" min="0" value="0" step="1" />
+    </div>
+    <div class="control-block">
+      <label for="edgeSlider">Top edges: <span id="edgeLabel">22</span></label>
+      <input id="edgeSlider" type="range" min="8" max="45" value="22" step="1" />
+    </div>
+  </section>
+
+  <section class="metrics-grid">
+    <article class="metric panel"><div class="metric-label">New infected</div><div class="metric-value" id="newInfected">—</div><div class="metric-sub">30-day outcome</div></article>
+    <article class="metric panel"><div class="metric-label">Infection reduction</div><div class="metric-value" id="infectionReduction">—</div><div class="metric-sub">vs. no-intervention baseline</div></article>
+    <article class="metric panel"><div class="metric-label">Travel removed</div><div class="metric-value" id="travelReduction">—</div><div class="metric-sub" id="budgetLabel">20% reference budget</div></article>
+    <article class="metric panel"><div class="metric-label">Solve time</div><div class="metric-value" id="runtime">—</div><div class="metric-sub">Gurobi runtime</div></article>
+  </section>
+
+  <section class="split-grid">
+    <article class="panel network-panel">
+      <div class="panel-head">
+        <div><div class="kicker">Mobility network</div><h2 id="networkTitle">Optimized travel flow</h2></div>
+        <div class="legend-inline"><span class="dot"></span> state <span class="line"></span> flow</div>
+      </div>
+      <div id="network"></div>
+      <div class="network-note">Arrow width is proportional to retained travel flow. Only the strongest edges are shown for readability.</div>
+    </article>
+
+    <article class="panel chart-panel">
+      <div class="panel-head"><div><div class="kicker">Selected optimizer</div><h2>Daily retained travel</h2></div></div>
+      <div class="chart-wrap"><canvas id="selectedFlowChart"></canvas></div>
+      <div class="selected-summary" id="selectedSummary"></div>
+    </article>
+  </section>
+
+  <section class="panel comparison-panel">
+    <div class="panel-head">
+      <div><div class="kicker">Cross-method comparison</div><h2>Daily travel flow after optimization</h2></div>
+      <span class="pill">Jul 30 – Aug 28, 2020</span>
+    </div>
+    <div class="chart-wrap large"><canvas id="flowComparisonChart"></canvas></div>
+  </section>
+
+  <section class="split-grid lower">
+    <article class="panel chart-panel">
+      <div class="panel-head"><div><div class="kicker">Outcome trade-off</div><h2>Infection reduction vs. travel removed</h2></div></div>
+      <div class="chart-wrap"><canvas id="tradeoffChart"></canvas></div>
+    </article>
+    <article class="panel decision-card">
+      <div class="kicker">Decision takeaway</div>
+      <h2>Optimization flexibility has a policy cost.</h2>
+      <p><strong>Continuous Edge</strong> provides the strongest infection reduction among methods constrained near the 20% travel budget.</p>
+      <p><strong>Binary Edge</strong> achieves a large infection reduction while removing less travel, but is harder to implement at fine granularity.</p>
+      <p><strong>Cluster</strong> has the lowest infections in this run, but removes <strong>86.89%</strong> of travel and is therefore not budget-matched to the other methods.</p>
+    </article>
+  </section>
+
+  <section class="panel table-panel">
+    <div class="panel-head"><div><div class="kicker">Experiment summary</div><h2>All strategies</h2></div></div>
+    <div class="table-scroll"><table><thead><tr><th>Method</th><th>New infected</th><th>Infection reduction</th><th>Travel removed</th><th>Runtime</th></tr></thead><tbody id="summaryTable"></tbody></table></div>
+  </section>
+
+  <footer>Static GitHub Pages demo · Data parsed from the supplied optimizer output</footer>
+</main>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
