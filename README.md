@@ -70,3 +70,8 @@ data.js      Preprocessed optimized flow matrices for the evaluation horizon
 10. Michigan
 
 The summary metrics shown in the dashboard are the same values reported in the supplied comparison output.
+
+
+## Optimizer comparison figure
+
+The page includes the original saved epidemic comparison plot at `assets/optimizer_compare_infected.png`. It is shown in a full-width **Epidemic Outcome Comparison** section and can be clicked to open at full resolution.
