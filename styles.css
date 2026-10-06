@@ -20,3 +20,46 @@
 .flow-edge.reduced{stroke:#b31b34;opacity:.58}
 .legend-flow.reduced{stroke:#b31b34}
 .flow-view-hint{color:var(--red);font-weight:700}
+
+/* Compact epidemic outcome figure */
+.outcome-figure-panel{
+  margin-bottom:18px;
+}
+.outcome-figure-link{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  padding:12px 24px 6px;
+  text-decoration:none;
+}
+.outcome-figure{
+  display:block;
+  width:min(100%, 760px);
+  height:auto;
+  max-height:440px;
+  object-fit:contain;
+  border-radius:12px;
+  border:1px solid var(--border);
+  box-shadow:0 8px 22px rgba(13,38,76,.07);
+  background:#fff;
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.outcome-figure-link:hover .outcome-figure{
+  transform:translateY(-1px);
+  box-shadow:0 12px 26px rgba(13,38,76,.11);
+}
+.figure-caption{
+  max-width:820px;
+  margin:8px auto 18px;
+  padding:0 22px;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.5;
+  text-align:center;
+}
+@media(max-width:700px){
+  .outcome-figure-link{padding:10px 12px 4px}
+  .outcome-figure{width:100%;max-height:none;border-radius:9px}
+  .figure-caption{padding:0 16px;font-size:.78rem;text-align:left}
+}
