@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 </head>
 <body>
 <header class="hero">
@@ -58,10 +59,10 @@
     <article class="panel network-panel">
       <div class="panel-head">
         <div><div class="kicker">Mobility network</div><h2 id="networkTitle">Optimized travel flow</h2></div>
-        <div class="legend-inline"><span class="dot"></span> state <span class="line"></span> flow</div>
+        <div class="legend-inline"><span class="map-chip"></span> state area <span class="line"></span> flow</div>
       </div>
-      <div id="network"></div>
-      <div class="network-note">Arrow width is proportional to retained travel flow. Only the strongest edges are shown for readability.</div>
+      <div id="network" aria-label="Physical map of selected states and optimized travel flows"></div>
+      <div class="network-note">State shapes use their real geographic positions. Arrow width is proportional to retained travel flow; only the strongest directed edges are shown for readability.</div>
     </article>
 
     <article class="panel chart-panel">

@@ -5,7 +5,7 @@ A zero-build static web demo for the optimizer outputs in this project. It is de
 ## What the demo shows
 
 - Select among **Binary Edge**, **Continuous Edge**, **Binary Node**, and **Cluster** optimizers.
-- Interactive directed mobility network using the optimized flow matrices.
+- Interactive directed mobility network over the physical map of the selected U.S. states, using the optimized flow matrices.
 - Switch between a 30-day aggregate network and a single-day network.
 - Inspect daily retained travel for the selected optimizer.
 - Compare daily retained travel across all four optimizers.
@@ -26,7 +26,7 @@ python -m http.server 8000
 
 Then open `http://localhost:8000`.
 
-The charts and network viewer use Chart.js and Cytoscape.js from public CDNs, so an internet connection is needed when loading the page.
+The charts use Chart.js. The physical state map uses D3, TopoJSON, and the public `us-atlas` state boundary dataset from jsDelivr, so an internet connection is needed when loading the page.
 
 ## Deploy with GitHub Pages
 
@@ -49,7 +49,7 @@ You can also place this entire demo in a `docs/` directory and choose `/docs` in
 ```text
 index.html   Main dashboard
 styles.css   Responsive presentation styling
-app.js       Interactions, charts, Cytoscape network
+app.js       Interactions, charts, physical-map network
 data.js      Preprocessed optimized flow matrices for the evaluation horizon
 .nojekyll    Prevents Jekyll processing
 ```
